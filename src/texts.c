@@ -88,40 +88,44 @@ void new_line()
 void print_left(char *text)
 {
     buffer b;
+    b.size = 0;
     b.percentage = 100;
 
     char *result = console_left(text, &b);
     printf("%s\n", result);
-    //free(result);
+    free(result);
 }
 
 void print_right(char *text)
 {
     buffer b;
+    b.size = 0;
     b.percentage = 100;
 
     char *result = console_right(text, &b);
     printf("%s\n", result);
-    //free(result);
+    free(result);
 }
 
 void print_center(char *text)
 {
     buffer b;
+    b.size = 0;
     b.percentage = 100;
 
     char *result = console_center(text, &b);
     printf("%s\n", result);
-    //free(result);
+    free(result);
 }
 
 void print_tf(char *text, alignment align, int size)
 {
     buffer b;
+    b.size = 0;
     b.percentage = size;
 
     char *result = console_tf(text, align, b);
     printf("%s\n", result);
-    //free(result);
+    free(result);
 }
 #pragma endregion
