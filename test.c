@@ -12,7 +12,7 @@ int main()
     print_left("Left align text");
     print_right("Right align text");
     print_center("Center align text");
-    print_tf("Text with custom align and buffer", right, 70);
+    print_tf("Text with right align and 40\% buffer_width", right, 40);
     getch();
     return 0;
 }
