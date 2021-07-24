@@ -1,5 +1,6 @@
 /*
-** Console Text Formatter v1.0
+** Console Text Formatter v0.2 (staging)
+** The main header file. You should include this header into your program
 ** Naveen Dharmathunga - 22/07/2021
 */
 #ifndef CONTF_H   /* Include guard */
@@ -33,30 +34,24 @@ typedef enum
     left, right, center
 } alignment;
 
-typedef struct
+typedef struct buffer
 {
     unsigned short size;
     unsigned short percentage;
-} buffer;
+} buffer_w;
 
 #pragma endregion
 
 
 #pragma region string_functions
 
-//Text align: left
-char *console_left(char *text, buffer *_buffer);
-//Text align: Right
-char *console_right(char *text, buffer *_buffer);
-//Text align: Center
-char *console_center(char *text, buffer *_buffer);
 /*
 Text align with properties
 text: target string to format
 align: text alignment (left, right, center)
 size: formatting area of a row of the console
 */
-char *console_tf(char *text, alignment align, buffer _buffer);
+char *console_tf(char *text, alignment align, buffer_w *_buffer);
 
 #pragma endregion
 
@@ -65,8 +60,11 @@ char *console_tf(char *text, alignment align, buffer _buffer);
 
 //same as printf("\\n");
 void new_line();
-void print_left(char *text);  
+//Text align: left
+void print_left(char *text);
+//Text align: Right  
 void print_right(char *text);
+//Text align: Center
 void print_center(char *text);
 void print_tf(char *text, alignment align, int size);
 

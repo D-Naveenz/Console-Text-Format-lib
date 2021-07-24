@@ -1,5 +1,4 @@
 #include <stdio.h>
-//#include <stdlib.h>
 #include <conio.h>
 #include <core.h>
 
@@ -54,18 +53,18 @@ char *get_spaces_ptr(char *text, alignment align, size_t buffer_size)
 	return spaces_ptr;
 }
 
-unsigned short gen_target_buffer(buffer *_buffer)
+buffer_w *validate_buffer(buffer_w *_buffer)
 {
 	if (_buffer->size == 0)
 	{
 		unsigned short width = get_window_buffer_width();
 		_buffer->size = width * _buffer->percentage / 100;
 		_buffer->percentage = 0;
-		return _buffer->size;
+		return _buffer;
 	}
 	else
 	{
 		_buffer->percentage = 0;
-		return _buffer->size;
+		return _buffer;
 	}
 }
