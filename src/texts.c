@@ -15,7 +15,7 @@ char *console_tf(char *text, alignment align, buffer_w *_buffer)
 
     if (align == left)
     {
-        *result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
+        result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
         if (result == NULL)
         {
             printf("An error occurred while allocating memory for the string!\n");
@@ -27,7 +27,7 @@ char *console_tf(char *text, alignment align, buffer_w *_buffer)
     }
     else if (align == right)
     {
-        *result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
+        result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
         if (result == NULL)
         {
             printf("An error occurred while allocating memory for the string!\n");
@@ -39,7 +39,7 @@ char *console_tf(char *text, alignment align, buffer_w *_buffer)
     }
     else
     {
-        *result = malloc(strlen(text) + strlen(spaces) * 2 + 1); // +1 for the null-terminator
+        result = malloc(strlen(text) + strlen(spaces) * 2 + 1); // +1 for the null-terminator
         if (result == NULL)
         {
             printf("An error occurred while allocating memory for the string!\n");
