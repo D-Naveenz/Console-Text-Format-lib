@@ -10,7 +10,7 @@ unsigned short get_window_buffer_width();
 buffer_w *validate_buffer(buffer_w *_buffer);
 //Returns a string of spaces according to the alignment and buffer size
 //Dynamically allocated - It should be freed memory after being used.
-char *get_spaces_ptr(char *text, alignment align, size_t buffer_size);
+char *get_spaces_ptr(char *text, align align, size_t buffer_size);
 #pragma endregion
 
 #endif // !_CORE_H

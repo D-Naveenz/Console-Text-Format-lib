@@ -2,6 +2,8 @@
 #include <conio.h>
 #include <contf.h>
 
+
+
 int main()
 {
     print_center("Console Text Formatter - v0.1");
@@ -14,6 +16,11 @@ int main()
     print_right("Right align text");
     print_center("Center align text");
     print_tf("Text with right align and 40\% buffer_width", right, 40);
+    // https://stackoverflow.com/questions/17556780/how-can-i-assign-value-to-the-struct-inside-union-here
+    border common_b = {false, {'|'}};
+    border custom_b = {true, {.custom = {'{', '}'}}};
+    print_tfb("Text with common borders", left, common_b, 80);
+    print_tfb("Text with custom borders", center, custom_b, 40);
     getch();
     return 0;
 }
