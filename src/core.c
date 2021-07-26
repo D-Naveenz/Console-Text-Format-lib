@@ -68,3 +68,18 @@ buffer_w *validate_buffer(buffer_w *_buffer)
 		return _buffer;
 	}
 }
+
+bool is_custom_border(border target)
+{
+	//char a = target.custom.left_end;
+	char b = target.custom.right_end;
+
+	if (b != 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

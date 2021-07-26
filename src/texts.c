@@ -3,10 +3,10 @@
 #include <string.h>
 #include <core.h>
 
+// Defined full_width here
 buffer_w full_width = {0, 100};
 
 #pragma region string_functions
-
 char *console_tf(char *text, align align, buffer_w *_buffer)
 {
     _buffer = validate_buffer(_buffer);
@@ -66,14 +66,14 @@ char *console_tfb(char *text, align align, border ends, buffer_w *_buffer)
     char left[2] = "\0";
     char right[2] = "\0";
 
-    if (ends.is_custom)
+    if (is_custom_border(ends))
     {
-        left[0] = ends.border.custom.left_end;
-        right[0] = ends.border.custom.right_end;
+        left[0] = ends.custom.left_end;
+        right[0] = ends.custom.right_end;
     }
     else
     {
-        left[0] = right[0] = ends.border.common;
+        left[0] = right[0] = ends.common;
     }
 
     // allocate new memory for the result string
@@ -87,36 +87,55 @@ char *console_tfb(char *text, align align, border ends, buffer_w *_buffer)
     free(textstr);
     return result;
 }
-
 #pragma endregion
 
-#pragma region printing_functions
+#pragma region prints
+void print_tf(char *text, align align, int size)
+{
+    buffer_w new_bf = {0, size};
+
+    char *result = console_tf(text, align, &new_bf);
+    printf("%s", result);
+    free(result);
+}
+
+void print_tfb(char *text, align align, border ends, int size)
+{
+    buffer_w new_bf = {0, size};
+
+    char *result = console_tfb(text, align, ends, &new_bf);
+    printf("%s", result);
+    //free(result);
+}
+#pragma endregion
+
+#pragma region print_lines
 
 void new_line()
 {
     printf("\n");
 }
 
-void print_left(char *text)
+void println_l(char *text)
 {
     printf("%s\n", text);
 }
 
-void print_right(char *text)
+void println_r(char *text)
 {
     char *result = console_tf(text, right, &full_width);
     printf("%s\n", result);
     free(result);
 }
 
-void print_center(char *text)
+void println_c(char *text)
 {
     char *result = console_tf(text, center, &full_width);
     printf("%s\n", result);
     free(result);
 }
 
-void print_tf(char *text, align align, int size)
+void println_tf(char *text, align align, int size)
 {
     buffer_w new_bf = {0, size};
 
@@ -125,7 +144,7 @@ void print_tf(char *text, align align, int size)
     free(result);
 }
 
-void print_tfb(char *text, align align, border ends, int size)
+void println_tfb(char *text, align align, border ends, int size)
 {
     buffer_w new_bf = {0, size};
 
