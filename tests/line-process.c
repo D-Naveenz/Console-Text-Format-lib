@@ -2,8 +2,6 @@
 #include <conio.h>
 #include <contf.h>
 
-
-
 int main()
 {
     buffer_w b_width = {0, 60};

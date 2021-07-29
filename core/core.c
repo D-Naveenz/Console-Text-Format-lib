@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <conio.h>
-#include <core.h>
+#include <ctf-core.h>
 
 // The following code segment works for all for all Windows OS
 #ifdef _WIN32

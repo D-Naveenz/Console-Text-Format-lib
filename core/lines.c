@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <core.h>
+#include <contf.h>
+#include <ctf-core.h>
 
 // Defined def_placeholder here
 const char def_placeholder = ASCII_BOX_LINE_H;

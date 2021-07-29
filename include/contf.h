@@ -8,10 +8,10 @@
 
 #pragma region defines
 // Extended ASCII letters
-#define ASCII_DEGREE (char)248          //Degree symbol ( ° )
-#define ASCII_PI (char)227              //pi letter ( π )
-#define ASCII_BOX_UPPER_LEFT (char)218  //Box drawing character single line upper left corner ( ┌ )
-#define ASCII_BOX_UPPER_RIGHT (char)191 //Box drawing character single line upper right corner ( ┐ )
+#define ASCII_DEGREE (char)248          // Degree symbol ( ° )
+#define ASCII_PI (char)227              // pi letter ( π )
+#define ASCII_BOX_UPPER_LEFT (char)218  // Box drawing character single line upper left corner ( ┌ )
+#define ASCII_BOX_UPPER_RIGHT (char)191 // Box drawing character single line upper right corner ( ┐ )
 #define ASCII_BOX_LOWER_LEFT (char)192  // Box drawing character single line lower left corner ( └ )
 #define ASCII_BOX_LOWER_RIGHT (char)217 // Box drawing character single line lower right corner ( ┘ )
 #define ASCII_BOX_LINE_H_DOWN (char)194 // Box drawing character single line horizontal down ( ┬ )
@@ -21,32 +21,9 @@
 #define ASCII_NBSP (char)255            // Non-breaking space or no-break space
 #pragma endregion
 
-#pragma region variables_n_types
-const char def_placeholder; // default placeholder for spaces between texts
-
-typedef enum alignment
-{
-    left,
-    right,
-    center
-} align;
-
-typedef struct buffer
-{
-    unsigned short size;
-    unsigned short percentage;
-} buffer_w;
-
-typedef union borderdef // Can assign one char or two chars if you want custom ends.
-{
-    char common;
-    struct
-    {
-        char left_end;
-        char right_end;
-    } custom;
-} border;
-#pragma endregion
+#ifndef CTF_VARS_H
+#include <ctf-vars.h>
+#endif // !CTF_VARS_H
 
 #pragma region string_functions
 /*

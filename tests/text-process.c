@@ -2,8 +2,6 @@
 #include <conio.h>
 #include <contf.h>
 
-
-
 int main()
 {
     println_c("Console Text Formatter - v0.1");
