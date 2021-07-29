@@ -3,6 +3,7 @@
 
 const char def_placeholder; // default placeholder for spaces between texts
 
+// Enumeration of text alignment (left, Right, Center)
 typedef enum alignment
 {
     left,
@@ -10,13 +11,17 @@ typedef enum alignment
     center
 } align;
 
-typedef struct buffer
+// Console window buffer size type definition
+// A percentage or a fixed value can be retained
+typedef struct buffer   
 {
     unsigned short size;
     unsigned short percentage;
 } buffer_w;
 
-typedef union borderdef // Can assign one char or two chars if you want custom ends.
+// Border definition for the function parameters 
+// Can assign one char (common border) or two chars (custom border) if you want custom ends.
+typedef union borderdef
 {
     char common;
     struct
