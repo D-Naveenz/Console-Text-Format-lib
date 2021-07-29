@@ -2,23 +2,43 @@
 #include <conio.h>
 #include <contf.h>
 
+void header()
+{
+    println_c("Console Text Formatter - v1.0");
+    print_tf("Test v0.2", left, 50);
+    print_tf("Naveen Dharmathunga", right, 50);
+    separator();
+    new_line();
+}
+
 int main()
 {
     buffer_w b_width = {0, 60};
-    println_c("Console Text Formatter - v0.1");
-    separator();
-    new_line();
-    printf("Hello Guys! This is a c library which provides easy functions to format your prints on the console.\n");
-    printf("\nExamples\n");
+    // printing the header of the program
+    header();
+
+    printf("Console text formatter library brings a more easier way for drawings of your console program.\n");
+    printf("\n||||Line drawing features||||\n");
     
-    printf("Separator:\n");
+    printf("\n1) Print a separator:\n");
     separator();
-    printf("Separator with custom placeholder:\n");
+
+    printf("\n2) Print a separator with custom placeholder:\n");
     separator_c(ASCII_BOX_LINE_V);
-    printf("Draw a line with user given buffer size and aligned to the right:\n");
+
+    printf("\n3) Draw a line with user given buffer size\n");
+    printf("%s |<- line with 60%% buffer width\n", genln((char)240, &b_width));
+
+    printf("\nCan compine text alignments functions with lines to do amazing things\n");
+    printf("4) Draw a line with user given buffer size and aligned to the right:\n");
     println_r(genln(ASCII_DEGREE, &b_width));
-    printf("Draw a line with both custom ends and user given settings:\n");
-    border custom_b = {.custom = {ASCII_BOX_UPPER_LEFT, ASCII_BOX_UPPER_RIGHT}};
+
+    printf("\n5) Draw a line with both custom ends and user given settings:\n");
+    printf("i) Draw a line with a common border: (border: %c)\n", (char)254);
+    border common_b = {(char)254};
+    println_c(genlne(def_placeholder, common_b, &b_width));
+    printf("ii) Draw a line with a custom border: (left: %c, right: >)\n", (char)195);
+    border custom_b = {.custom = {(char)195, '>'}};
     println_c(genlne(def_placeholder, custom_b, &b_width));
     getch();
     return 0;
