@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <conio.h>
-#include <core.h>
+#include <ctf-core.h>
 
-//The following code segment works for all for all Windows OS
+// The following code segment works for all for all Windows OS
 #ifdef _WIN32
 #include <Windows.h>
 
@@ -19,12 +19,12 @@ unsigned short get_window_buffer_width()
 		printf("An error occurred while getting window buffer width!\n");
 		printf("Please run this program in externel console!");
 		getch();
-		//should raise an error
+		// should raise an error
 		exit(EXIT_FAILURE);
 	}
 }
 
-//The following code segment works for all for linux
+// The following code segment works for all for linux
 #elif __linux__
 //#include <Windows.h>
 
@@ -33,9 +33,9 @@ unsigned short get_window_buffer_width()
 }
 #endif
 
-char *get_spaces_ptr(char *text, alignment align, size_t buffer_size)
+char *get_spaces_ptr(char *text, align align, size_t buffer_size)
 {
-	char *spaces_ptr; //padding str pointer
+	char *spaces_ptr; // padding str pointer
 	if (align == left || align == right)
 	{
 		buffer_size = buffer_size - strlen(text);
@@ -45,9 +45,9 @@ char *get_spaces_ptr(char *text, alignment align, size_t buffer_size)
 		buffer_size = (buffer_size - strlen(text)) / 2;
 	}
 
-	//allocate the required mem, calloc ensures zero terminated
+	// allocate the required mem, calloc ensures zero terminated
 	spaces_ptr = calloc(buffer_size + 1, sizeof(char));
-	//set a chars to hold spaces
+	// set a chars to hold spaces
 	memset(spaces_ptr, ' ', buffer_size);
 
 	return spaces_ptr;
@@ -66,5 +66,20 @@ buffer_w *validate_buffer(buffer_w *_buffer)
 	{
 		_buffer->percentage = 0;
 		return _buffer;
+	}
+}
+
+bool is_custom_border(border target)
+{
+	//char a = target.custom.left_end;
+	char b = target.custom.right_end;
+
+	if (b != 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
