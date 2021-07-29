@@ -62,6 +62,3 @@ dkms.conf
 
 # Local History for Visual Studio Code
 .history/
-
-# Contf Project
-libtest/

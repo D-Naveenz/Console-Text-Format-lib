@@ -31,6 +31,6 @@ ar rcs libcontf.a *.o
 Write-Output "Removing redundant files..."
 Remove-Item *.o
 
-Write-Output "Done."
 Write-Output ""
+Write-Output "Done!"
 Pause
