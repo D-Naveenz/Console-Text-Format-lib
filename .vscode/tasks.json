@@ -7,9 +7,9 @@
             "args": [
                 "-g",
                 "${file}",
-                "${fileDirname}\\src\\**.c",
+                "${workspaceFolder}\\core\\**.c",
                 "-I",
-                "${fileDirname}\\include",
+                "${workspaceFolder}\\include",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
