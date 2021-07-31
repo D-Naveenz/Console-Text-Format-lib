@@ -4,7 +4,7 @@
 
 void header()
 {
-    println_c("Console Text Formatter - v1.0");
+    println_c("Console Text Format lib - v1.0");
     print_tf("Test v0.2", left, 50);
     print_tf("Naveen Dharmathunga", right, 50);
     separator();
@@ -19,7 +19,7 @@ int main()
     // printing the header of the program
     header();
 
-    printf("You can do awsome things with Console text formatter library.\n");
+    printf("You can do awsome things with Contf library.\n");
     printf("\n||||Text Formats and Line Drawing combinations||||\n");
     
     printf("\n1) Print a text in a cell\n");

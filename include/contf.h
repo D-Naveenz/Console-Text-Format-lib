@@ -1,7 +1,7 @@
 /*
-** Console Text Formatter v0.2 (staging)
+** Console Text Format lib v1.0
 ** The main header file. Include this header into your program
-** Naveen Dharmathunga - 29/07/2021
+** Naveen Dharmathunga - 31/07/2021
 */
 #ifndef CONTF_H /* Include guard */
 #define CONTF_H

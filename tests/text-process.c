@@ -4,7 +4,7 @@
 
 void header()
 {
-    println_c("Console Text Formatter - v1.0");
+    println_c("Console Text Format lib - v1.0");
     print_tf("Test v0.2", left, 50);
     print_tf("Naveen Dharmathunga", right, 50);
     separator();
@@ -16,13 +16,13 @@ int main()
     // printing the header of the program
     header();
 
-    printf("Console text formatter library brings a more easier way to process text outputs of your program.\n");
+    printf("Contf library brings a more easier way to process text outputs of your program.\n");
     printf("\n||||Text processing features||||\n");
     
     printf("\n1) Format text alignment.\n");
-    println_l("Left align text");
-    println_r("Right align text");
-    println_c("Center align text");
+    println_l("Left aligned text");
+    println_r("Right aligned text");
+    println_c("Center aligned text");
 
     printf("\n2) Format text alignment with user defined buffer width.\n");
     print_tf("Right aligned text", right, 40);
