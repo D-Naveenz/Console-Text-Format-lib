@@ -35,7 +35,7 @@ printf("\t\t\tLet's hope this is a ceter-aligned text.");
     ],
     ```
 3. include the header _**(contf.h)**_ to your code.
-4. Compile the code with including the header and the library
+4. Compile the code with including the header and the library  
    `gcc -g {C file} -I {include folder} -L {library folder} -lcontf -o {output file}`
    >_**VsCode:** tasks.json_  
    ```json
