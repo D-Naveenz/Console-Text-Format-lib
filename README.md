@@ -17,10 +17,10 @@ printf("\t\t\tLet's hope this is a ceter-aligned text.");
 3. Draw borders _(left & right)_ of the formatted text.  
    It will help to create text arts, tables, shapes, etc.  
    ![Text with borders](docs/text-border.png)
-4. Draw horizontal lines with user defined settings _(line format, size, ends)_  
+4. Draw horizontal lines with user-defined settings _(line format, size, ends)_  
    ![separator](docs/line-separator.png)  
    ![Draw lines](docs/line-buffer.png)
-5. Ablility to combine text format functions with lines drawing functions.
+5. Ability to combine text format functions with line drawing functions.
    ![Print a cell](docs/combinations.png)
 
 ##### _How to use libcontf_
