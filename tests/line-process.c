@@ -4,7 +4,7 @@
 
 void header()
 {
-    println_c("Console Text Formatter - v1.0");
+    println_c("Console Text Format lib - v1.0");
     print_tf("Test v0.2", left, 50);
     print_tf("Naveen Dharmathunga", right, 50);
     separator();
@@ -17,7 +17,7 @@ int main()
     // printing the header of the program
     header();
 
-    printf("Console text formatter library brings a more easier way for drawings of your console program.\n");
+    printf("Contf library brings a more easier way for drawings of your console program.\n");
     printf("\n||||Line drawing features||||\n");
     
     printf("\n1) Print a separator:\n");
@@ -29,7 +29,7 @@ int main()
     printf("\n3) Draw a line with user given buffer size\n");
     printf("%s |<- line with 60%% buffer width\n", genln((char)240, &b_width));
 
-    printf("\nCan compine text alignments functions with lines to do amazing things\n");
+    printf("\nCan combine text alignments functions with lines to do amazing things\n");
     printf("4) Draw a line with user given buffer size and aligned to the right:\n");
     println_r(genln(ASCII_DEGREE, &b_width));
 
