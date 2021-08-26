@@ -8,49 +8,56 @@
 buffer_w full_width = {0, 100};
 
 #pragma region string_functions
-char *console_tf(char *text, align align, buffer_w *_buffer)
+char *textLeft(int _buffer, char *text)
 {
-    _buffer = validate_buffer(_buffer);
-    char *spaces = get_spaces_ptr(text, align, _buffer->size);
-    char *result;
+    char *spaces = get_spaces_ptr(text, left, _buffer);
+    char *result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
 
-    if (align == left)
+    if (result == NULL)
     {
-        result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
-        if (result == NULL)
-        {
-            printf("An error occurred while allocating memory for the string!\n");
-            exit(EXIT_FAILURE);
-        }
-
-        strcpy(result, text);
-        strcat(result, spaces);
+        printf("An error occurred while allocating memory for the string!\n");
+        exit(EXIT_FAILURE);
     }
-    else if (align == right)
+
+    strcpy(result, text);
+    strcat(result, spaces);
+
+    free(spaces);
+    return result;
+}
+
+char *textRight(int _buffer, char *text)
+{
+    char *spaces = get_spaces_ptr(text, right, _buffer);
+    char *result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
+
+    if (result == NULL)
     {
-        result = malloc(strlen(text) + strlen(spaces) + 1); // +1 for the null-terminator
-        if (result == NULL)
-        {
-            printf("An error occurred while allocating memory for the string!\n");
-            exit(EXIT_FAILURE);
-        }
-
-        strcpy(result, spaces);
-        strcat(result, text);
+        printf("An error occurred while allocating memory for the string!\n");
+        exit(EXIT_FAILURE);
     }
-    else
+
+    strcpy(result, spaces);
+    strcat(result, text);
+
+    free(spaces);
+    return result;
+}
+
+char *textCenter(int _buffer, char *text)
+{
+    char *spaces = get_spaces_ptr(text, right, _buffer);
+    char *result = malloc(strlen(text) + strlen(spaces) * 2 + 1); // +1 for the null-terminator
+
+    if (result == NULL)
     {
-        result = malloc(strlen(text) + strlen(spaces) * 2 + 1); // +1 for the null-terminator
-        if (result == NULL)
-        {
-            printf("An error occurred while allocating memory for the string!\n");
-            exit(EXIT_FAILURE);
-        }
-
-        strcpy(result, spaces);
-        strcat(result, text);
-        strcat(result, spaces);
+        printf("An error occurred while allocating memory for the string!\n");
+        exit(EXIT_FAILURE);
     }
+
+    strcpy(result, spaces);
+    strcat(result, text);
+    strcat(result, spaces);
 
     free(spaces);
     return result;

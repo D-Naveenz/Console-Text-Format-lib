@@ -35,7 +35,6 @@ int main()
     print_tf("50% right aligned text", right, 50);
 
     printf("\n3) Can print a text with a border.\n");
-    // https://stackoverflow.com/questions/17556780/how-can-i-assign-value-to-the-struct-inside-union-here
     border common_b = {(char)178};
     border custom_b = {.custom = {'{', '}'}};
     println_tfb("Text with common borders", left, common_b, 80);
