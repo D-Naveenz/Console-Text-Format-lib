@@ -4,9 +4,6 @@
 #include <contf.h>
 #include <ctf-core.h>
 
-// Defined full_width here
-buffer_w full_width = {0, 100};
-
 #pragma region string_functions
 char *textLeft(int _buffer, char *text)
 {
@@ -46,7 +43,7 @@ char *textRight(int _buffer, char *text)
 
 char *textCenter(int _buffer, char *text)
 {
-    char *spaces = get_spaces_ptr(text, right, _buffer);
+    char *spaces = get_spaces_ptr(text, center, _buffer);
     char *result = malloc(strlen(text) + strlen(spaces) * 2 + 1); // +1 for the null-terminator
 
     if (result == NULL)
@@ -62,102 +59,110 @@ char *textCenter(int _buffer, char *text)
     free(spaces);
     return result;
 }
+#pragma endregion
 
-char *console_tfb(char *text, align align, border ends, buffer_w *_buffer)
+// Main print function
+void printFText(char *(*align)(int _buffer, char *text), int width, char *ends, int next_ln, char *text)
 {
     // genarate buffer width from the percentage
-    _buffer = validate_buffer(_buffer);
-    // margines would take 2 spaces from the buffer.
-    _buffer->size -= 2;
-    // genarate the text string using console_tf()
-    char *textstr = console_tf(text, align, _buffer);
-    char left[2] = "\0";
-    char right[2] = "\0";
+    unsigned short _buffer = get_buffer(width);
 
-    if (is_custom_border(ends))
+    // creating 2D array for borders
+    char **border = (char **)malloc(sizeof(char *) * 2);
+    int border_size = 0;
+
+    if (ends != NULL)
     {
-        left[0] = ends.custom.left_end;
-        right[0] = ends.custom.right_end;
+        int count = 0;
+        char *token = strtok(ends, BORDER_DELIM);
+
+        // get border ends
+        while (token != NULL)
+        {
+            // Trimiing the token first
+            token = trim(token);
+
+            border[count] = (char *)malloc(strlen(token));
+            strcpy(border[count++], token);
+            border_size += strlen(token);
+            token = strtok(NULL, BORDER_DELIM);
+        }
+
+        // If there is only one token in the array
+        if (count < 2)
+        {
+            /*border[count + 1] = (char *)malloc(strlen(border[count]));
+            strcat(border[count + 1], border[count]);*/
+            border[count] = strdup(border[count - 1]);
+            border_size++;
+        }
+    }
+
+    // margines would take some spaces from the buffer.
+    _buffer -= border_size;
+
+    // genarate the text string
+    char *textstr = align(_buffer, text);
+
+    char *result;
+
+    //building the final string
+    if (ends)
+    {
+        // allocate new memory for the result string
+        result = malloc(strlen(textstr) + border_size);
+
+        strcpy(result, border[0]);
+        strcat(result, textstr);
+        strcat(result, border[1]);
+
+        // freeing allocated memory
+        free(border);
+        free(textstr);
     }
     else
     {
-        left[0] = right[0] = ends.common;
+        result = textstr;
+
+        // freeing allocated memory
+        free(border);
     }
 
-    // allocate new memory for the result string
-    char *result = malloc(strlen(textstr) + 2 * sizeof(char));
-
-    // genarate the final string
-    strcpy(result, left);
-    strcat(result, textstr);
-    strcat(result, right);
-
-    free(textstr);
-    return result;
-}
-#pragma endregion
-
-#pragma region prints
-void print_tf(char *text, align align, int size)
-{
-    buffer_w new_bf = {0, size};
-
-    char *result = console_tf(text, align, &new_bf);
+    // printing the text string
     printf("%s", result);
-    free(result);
+    // print if next line is enabled
+    if (next_ln)
+        printf("\n");
 }
-
-void print_tfb(char *text, align align, border ends, int size)
-{
-    buffer_w new_bf = {0, size};
-
-    char *result = console_tfb(text, align, ends, &new_bf);
-    printf("%s", result);
-    //free(result);
-}
-#pragma endregion
 
 #pragma region print_lines
-
 void new_line()
 {
     printf("\n");
 }
 
-void println_l(char *text)
+void println(char *text)
 {
     printf("%s\n", text);
 }
 
-void println_r(char *text)
+void printlnR(char *text)
 {
-    char *result = console_tf(text, right, &full_width);
-    printf("%s\n", result);
-    free(result);
+    printFText(textRight, FULL_WIDTH, NULL, 1, text);
 }
 
-void println_c(char *text)
+void printlnC(char *text)
 {
-    char *result = console_tf(text, center, &full_width);
-    printf("%s\n", result);
-    free(result);
+    printFText(textCenter, FULL_WIDTH, NULL, 1, text);
 }
 
-void println_tf(char *text, align align, int size)
+void println_a(char *(*align)(int _buffer, char *text), int width, char *text)
 {
-    buffer_w new_bf = {0, size};
-
-    char *result = console_tf(text, align, &new_bf);
-    printf("%s\n", result);
-    free(result);
+    printFText(align, width, NULL, 1, text);
 }
 
-void println_tfb(char *text, align align, border ends, int size)
+void println_ab(char *(*align)(int _buffer, char *text), int width, char *ends, char *text)
 {
-    buffer_w new_bf = {0, size};
-
-    char *result = console_tfb(text, align, ends, &new_bf);
-    printf("%s\n", result);
-    //free(result);
+    printFText(align, width, ends, 1, text);
 }
 #pragma endregion

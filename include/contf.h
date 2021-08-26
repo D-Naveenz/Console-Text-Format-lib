@@ -21,21 +21,11 @@
 #define ASCII_NBSP (char)255            // Non-breaking space or no-break space
 #pragma endregion
 
-// import variable definitions
-#ifndef CTF_VARS_H
-#include <ctf-vars.h>
-#endif // !CTF_VARS_H
+#pragma region variables
+const char def_placeholder; // default placeholder for spaces between texts
 #pragma endregion
 
 #pragma region string functions
-/*
-Aligns text with given properties and returns the string
-Parameters:
-text: target string to format
-align: text alignment (left, right, center)
-_buffer: Buffer width
-*/
-char *console_tf(char *text, align align, buffer_w *_buffer);
 /*
 Aligns text with given properties and border and returns the string
 Parameters:
@@ -44,22 +34,18 @@ align: text alignment (left, right, center)
 ends: dorder definition
 _buffer: Buffer width
 */
-char *console_tfb(char *text, align align, border ends, buffer_w *_buffer);
+// char *console_tfb(char *text, align align, border ends, buffer_w *_buffer);  // deprecated
+char *textLeft(int _buffer, char *text);
+char *textRight(int _buffer, char *text);
+char *textCenter(int _buffer, char *text);
+
 /*
 Generates a line and returns the string
 Parameters:
 placeholder: drawing element for the line. ex: if placeholder is ─, then line will be ─────
 _buffer: Buffer width
 */
-char *genln(char placeholder, buffer_w *_buffer);
-/*
-Generates a line with given border and returns the string
-Parameters:
-placeholder: drawing element for the line. ex: if placeholder is ─, then line will be ─────
-ends: dorder definition
-_buffer: Buffer width
-*/
-char *genlne(char placeholder, border ends, buffer_w *_buffer);
+char *genln(int width, char *ends, char placeholder);
 #pragma endregion
 
 #pragma region print text
@@ -69,33 +55,25 @@ text: target string to format
 align: text alignment (left, right, center)
 size: Buffer width as a percentage
 */
-void print_tf(char *text, align align, int size);
-/*
-Print text with given alignment and buffer width with a border.
-text: target string to format
-align: text alignment (left, right, center)
-ends: dorder definition
-size: Buffer width as a percentage
-*/
-void print_tfb(char *text, align align, border ends, int size);
+void printFText(char *(*align)(int _buffer, char *text), int width, char *ends, int next_ln, char *text);
 #pragma endregion
 
 #pragma region print a row with text
 // same as printf("\\n");
 void new_line(void);
 // Print text to the left. Similar to printf() but goes to the next line after printing the text.
-void println_l(char *text);
+void println(char *text);
 // Print text to the right. Then goes to the next line after printing the text.
-void println_r(char *text);
+void printlnR(char *text);
 // Print text in center. Then goes to the next line after printing the text.
-void println_c(char *text);
+void printlnC(char *text);
 /*
 Print text with given alignment and buffer width. Goes to the next line after printing.
 text: target string to format
 align: text alignment (left, right, center)
 size: Buffer width as a percentage
 */
-void println_tf(char *text, align align, int size);
+void println_a(char *(*align)(int _buffer, char *text), int width, char *text);
 /*
 Print text with given alignment and buffer width with a border. Goes to the next line after printing.
 text: target string to format
@@ -103,7 +81,7 @@ align: text alignment (left, right, center)
 ends: dorder definition
 size: Buffer width as a percentage
 */
-void println_tfb(char *text, align align, border ends, int size);
+void println_ab(char *(*align)(int _buffer, char *text), int width, char *ends, char *text);
 #pragma endregion
 
 #pragma region print a line
@@ -113,15 +91,7 @@ Parameters:
 placeholder: drawing element for the line. ex: if placeholder is ─, then line will be ─────
 _buffer: Buffer width
 */
-void drawln(char placeholder, int size);
-/*
-Draw (print) a line with a given border.
-Parameters:
-placeholder: drawing element for the line. ex: if placeholder is ─, then line will be ─────
-ends: dorder definition
-_buffer: Buffer width
-*/
-void drawlne(char placeholder, border ends, int size);
+void drawln(char *ends, int width, int next_ln, char placeholder);
 #pragma endregion
 
 #pragma region print a row with a line
