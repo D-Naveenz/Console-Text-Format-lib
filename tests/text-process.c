@@ -1,24 +1,36 @@
 #include <stdio.h>
 #include <conio.h>
 #include <contf.h>
+#include <ctf-tests.h>
 
 int main()
 {
-    println_c("Console Text Formatter - v0.1");
-    println_c("------------------------------------------------------");
-    new_line();
-    printf("Hello Guys! This is a c library which provides easy functions to format your prints on the console.\n");
-    printf("\nExamples\n");
+    // printing the header of the program
+    header();
+
+    printf("Contf library brings a more easier way to process text outputs of your program.\n");
+    printf("\n||||Text processing features||||\n");
     
-    println_l("Left align text");
-    println_r("Right align text");
-    println_c("Center align text");
-    println_tf("Text with right align and 40\% buffer_width", right, 40);
-    // https://stackoverflow.com/questions/17556780/how-can-i-assign-value-to-the-struct-inside-union-here
-    border common_b = {'|'};
-    border custom_b = {.custom = {'{', '}'}};
-    println_tfb("Text with common borders", left, common_b, 80);
-    println_tfb("Text with custom borders", center, custom_b, 40);
+    printf("\n1) Format text alignment.\n");
+    println("Left aligned text");
+    printlnR("Right aligned text");
+    printlnC("Center aligned text");
+
+    printf("\n2) Format text alignment with user defined buffer width.\n");
+    printFText(textRight, 40, NULL, 0, "Right aligned text");
+    printf("|<- with 40%% console buffer width\n");
+    printFText(textCenter, 60, NULL, 0, "Center aligned text");
+    printf("|<- with 60%% console buffer width\n");
+    // contf lib printf functions doesn't work as printf() at everytime
+    // cannot print variables like printf("%s", anystring);
+    printFText(textLeft, 50, NULL, 0, "50% left aligned text");
+    printFText(textRight, 50, NULL, 0, "50% right aligned text");
+
+    printf("\n3) Can print a text with a border.\n");
+    char common_b[] = {(char)178, '\0'};
+    char custom_b[] = {'{', ',', '}', '\0'};
+    println_ab(textLeft, 80, common_b, "Text with common borders");
+    println_ab(textLeft, 80, custom_b, "Text with custom borders");
     getch();
     return 0;
 }
