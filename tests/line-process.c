@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <contf.h>
-#include <ctf-tests.h>
+#include "tests.h"
 
 int main()
 {
