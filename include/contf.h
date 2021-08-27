@@ -10,6 +10,7 @@
 // Extended ASCII letters
 #define ASCII_DEGREE (char)248          // Degree symbol ( ° )
 #define ASCII_PI (char)227              // pi letter ( π )
+#define ASCII_DEVIDE (char)246          // pi letter ( ÷ )
 #define ASCII_BOX_UPPER_LEFT (char)218  // Box drawing character single line upper left corner ( ┌ )
 #define ASCII_BOX_UPPER_RIGHT (char)191 // Box drawing character single line upper right corner ( ┐ )
 #define ASCII_BOX_LOWER_LEFT (char)192  // Box drawing character single line lower left corner ( └ )

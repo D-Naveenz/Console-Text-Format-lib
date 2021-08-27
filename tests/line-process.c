@@ -19,7 +19,7 @@ int main()
     separator_c(ASCII_BOX_LINE_V);
 
     printf("\n3) Draw a line with user given buffer size\n");
-    printf("%s |<- line with 60%% buffer width\n", genln(b_width, NULL, (char)240));
+    printf("%s|<- line with 60%% buffer width\n", genln(b_width, NULL, (char)240));
 
     printf("\nCan combine text alignments functions with lines to do amazing things\n");
     printf("4) Draw a line with user given buffer size and aligned to the right:\n");

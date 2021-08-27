@@ -22,6 +22,7 @@ unsigned short get_buffer(int percentage);
 char *trim(char *str);
 char *strdup(const char *s);
 char *strndup(const char *s, size_t n);
+void freev(void **ptr, int len, bool free_seg);
 //Returns a string of spaces according to the alignment and buffer size
 //Dynamically allocated - It should be freed memory after being used.
 char *get_spaces_ptr(char *text, align align, size_t buffer_size);
