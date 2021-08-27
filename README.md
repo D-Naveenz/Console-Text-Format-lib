@@ -1,5 +1,5 @@
 # Console Text Format lib (libcontf)
-#### v1.0
+#### v1.1
 
 ##### _Description_
 Console-Text-Format-lib is a C library that can handle different text formats and alignments. It also has the ability to create text-based graphics. Developers have to go through a difficult path to deal with the strings of the C language. It will be more difficult in console programs. Therefore, this library helps to reduce the size of the code for printing.
