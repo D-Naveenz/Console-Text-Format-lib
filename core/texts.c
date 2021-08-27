@@ -82,7 +82,7 @@ void printFText(char *(*align)(int _buffer, char *text), int width, char *ends, 
             // Trimiing the token first
             token = trim(token);
 
-            border[count] = (char *)malloc(strlen(token));
+            border[count] = (char *)malloc(strlen(token) * sizeof(char));
             strcpy(border[count++], token);
             border_size += strlen(token);
             token = strtok(NULL, BORDER_DELIM);
@@ -110,22 +110,18 @@ void printFText(char *(*align)(int _buffer, char *text), int width, char *ends, 
     if (ends)
     {
         // allocate new memory for the result string
-        result = malloc(strlen(textstr) + border_size);
+        result = malloc(strlen(textstr) + border_size * sizeof(char));
 
         strcpy(result, border[0]);
         strcat(result, textstr);
         strcat(result, border[1]);
 
-        // freeing allocated memory
-        free(border);
+        // freeing textstr
         free(textstr);
     }
     else
     {
         result = textstr;
-
-        // freeing allocated memory
-        free(border);
     }
 
     // printing the text string
@@ -133,6 +129,10 @@ void printFText(char *(*align)(int _buffer, char *text), int width, char *ends, 
     // print if next line is enabled
     if (next_ln)
         printf("\n");
+
+    // freeing allocated memory
+    free(border);
+    // free(result);
 }
 
 #pragma region print_lines

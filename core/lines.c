@@ -90,6 +90,8 @@ void drawln(char *ends, int width, int next_ln, char placeholder)
     // print if next line is enabled
     if (next_ln)
         printf("\n");
+
+    free(result);
 }
 
 #pragma region print_lines
