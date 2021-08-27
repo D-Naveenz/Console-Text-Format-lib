@@ -1,7 +1,7 @@
 /*
-** Console Text Format lib v1.0
+** Console Text Format lib v1.1
 ** The main header file. Include this header into your program
-** Naveen Dharmathunga - 31/07/2021
+** Naveen Dharmathunga - 27/08/2021
 */
 #ifndef CONTF_H /* Include guard */
 #define CONTF_H
@@ -28,34 +28,50 @@ const char def_placeholder; // default placeholder for spaces between texts
 
 #pragma region string functions
 /*
-Aligns text with given properties and border and returns the string
-Parameters:
-text: target string to format
-align: text alignment (left, right, center)
-ends: dorder definition
-_buffer: Buffer width
-*/
-// char *console_tfb(char *text, align align, border ends, buffer_w *_buffer);  // deprecated
+ * Abstract function for text format
+ * Aligns the left and return the string according to the given buffer width
+ * Parameters:
+ * _buffer: Buffer width of the console window
+ * text: target string to format
+ */
 char *textLeft(int _buffer, char *text);
+/*
+ * Abstract function for text format
+ * Aligns the right and return the string according to the given buffer width
+ * Parameters:
+ * _buffer: Buffer width of the console window
+ * text: target string to format
+ */
 char *textRight(int _buffer, char *text);
+/*
+ * Abstract function for text format
+ * Aligns the center and return the string according to the given buffer width
+ * Parameters:
+ * _buffer: Buffer width of the console window
+ * text: target string to format
+ */
 char *textCenter(int _buffer, char *text);
 
 /*
-Generates a line and returns the string
-Parameters:
-placeholder: drawing element for the line. ex: if placeholder is ─, then line will be ─────
-_buffer: Buffer width
-*/
+ * Generates a line and returns the string
+ * Parameters:
+ * width: Buffer width as a percentage
+ * ends: status of the line ends(string). NULL = no specific ends
+ * placeholder: drawing element for the line. (ex: if placeholder is ' ─ ', then line will be ─────)
+ */
 char *genln(int width, char *ends, char placeholder);
 #pragma endregion
 
 #pragma region print text
 /*
-Print text with given alignment and buffer width.
-text: target string to format
-align: text alignment (left, right, center)
-size: Buffer width as a percentage
-*/
+ * The main function that formats console text outputs. Prints the text according to the given properties
+ * Parameters:
+ * align: text alignment (textLeft, textRight, textCenter)
+ * width: Buffer width as a percentage
+ * ends: border status(string). NULL = no borders
+ * next_ln: go to the next line ('\\n')
+ * text: target string to format
+ */
 void printFText(char *(*align)(int _buffer, char *text), int width, char *ends, int next_ln, char *text);
 #pragma endregion
 
@@ -69,29 +85,33 @@ void printlnR(char *text);
 // Print text in center. Then goes to the next line after printing the text.
 void printlnC(char *text);
 /*
-Print text with given alignment and buffer width. Goes to the next line after printing.
-text: target string to format
-align: text alignment (left, right, center)
-size: Buffer width as a percentage
-*/
+ * Print text with given alignment and buffer width. Goes to the next line after printing.
+ * Parameters:
+ * align: text alignment (textLeft, textRight, textCenter)
+ * width: Buffer width as a percentage
+ * text: target string to format
+ */
 void println_a(char *(*align)(int _buffer, char *text), int width, char *text);
 /*
-Print text with given alignment and buffer width with a border. Goes to the next line after printing.
-text: target string to format
-align: text alignment (left, right, center)
-ends: dorder definition
-size: Buffer width as a percentage
+ * Print text with given alignment and buffer width with a border. Goes to the next line after printing.
+ * Parameters:
+ * align: text alignment (textLeft, textRight, textCenter)
+ * width: Buffer width as a percentage
+ * ends: border status(string). NULL = no borders
+ * text: target string to format
 */
 void println_ab(char *(*align)(int _buffer, char *text), int width, char *ends, char *text);
 #pragma endregion
 
 #pragma region print a line
 /*
-Draw (print) a line.
-Parameters:
-placeholder: drawing element for the line. ex: if placeholder is ─, then line will be ─────
-_buffer: Buffer width
-*/
+ * The main function that draws horizontal lines, according to the given properties.
+ * Parameters:
+ * ends: status of the line ends(string). NULL = no specific ends
+ * width: Buffer width as a percentage
+ * next_ln: go to the next line ('\\n')
+ * placeholder: drawing element for the line. (ex: if placeholder is ' ─ ', then line will be ─────)
+ */
 void drawln(char *ends, int width, int next_ln, char placeholder);
 #pragma endregion
 

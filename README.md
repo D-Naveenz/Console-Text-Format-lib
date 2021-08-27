@@ -11,17 +11,17 @@ printf("\t\t\tLet's hope this is a ceter-aligned text.");
 
 ##### _Available Features of the current version_
 1. Text alignment of the output _(left, center, right)_  
-   ![Text Alignments](docs/text-alignment.png)
+   ![Text Alignments](res/text-alignment.png)
 2. Change the buffer width of the formatted text
-   ![Format Text with buffer](docs/text-buffer.png)
+   ![Format Text with buffer](res/text-buffer.png)
 3. Draw borders _(left & right)_ of the formatted text.  
    It will help to create text arts, tables, shapes, etc.  
-   ![Text with borders](docs/text-border.png)
+   ![Text with borders](res/text-border.png)
 4. Draw horizontal lines with user-defined settings _(line format, size, ends)_  
-   ![separator](docs/line-separator.png)  
-   ![Draw lines](docs/line-buffer.png)
+   ![separator](res/line-separator.png)  
+   ![Draw lines](res/line-buffer.png)
 5. Ability to combine text format functions with line drawing functions.
-   ![Print a cell](docs/combinations.png)
+   ![Print a cell](res/combinations.png)
 
 ##### _How to use libcontf_
 1. Add the static library and the header to your c project
