@@ -7,100 +7,101 @@
 // Defined def_placeholder here
 const char def_placeholder = ASCII_BOX_LINE_H;
 
-#pragma region string_functions
-char *genln(char placeholder, buffer_w *_buffer)
+// Main string function for generate lines
+char *genln(int width, char *ends, char placeholder)
 {
     // genarate buffer width from the percentage
-    _buffer = validate_buffer(_buffer);
+    unsigned short _buffer = get_buffer(width);
     // create a string from the placeholder
     char ph_str[2] = {placeholder, '\0'};
-    char *result = (char *)malloc(_buffer->size + 1); // +1 for the null-terminator
+
+    // creating 2D array for ends of the line
+    char **_end = (char **)malloc(sizeof(char *) * 2);
+    int _endSize = 0;
+
+    if (ends != NULL)
+    {
+        int count = 0;
+        char *token = strtok(ends, BORDER_DELIM);
+
+        // get border ends
+        while (token != NULL)
+        {
+            // Trimiing the token first
+            token = trim(token);
+
+            _end[count] = (char *)malloc(strlen(token));
+            strcpy(_end[count++], token);
+            _endSize += strlen(token);
+            token = strtok(NULL, BORDER_DELIM);
+        }
+
+        // If there is only one token in the array
+        if (count < 2)
+        {
+            _end[count] = strdup(_end[count - 1]);
+            _endSize++;
+        }
+    }
+
+    // margines would take some spaces from the buffer.
+    _buffer -= _endSize;
+
+    // allocate new memory for the result string
+    char *result = (char *)calloc(_buffer + _endSize + 1, sizeof(char)); // +1 for the null-terminator
     if (result == NULL)
     {
         printf("An error occurred while allocating memory for the string!\n");
         exit(EXIT_FAILURE);
     }
-    else
-    {
-        strcpy(result, ph_str);
-    }
-    
-
-    int i = 0;
-    while (i < _buffer->size - 1)
-    {
-        strcat(result, ph_str);
-        i++;
-    }
-    return result;
-}
-
-char *genlne(char placeholder, border ends, buffer_w *_buffer)
-{
-    // genarate buffer width from the percentage
-    _buffer = validate_buffer(_buffer);
-    // margines would take 2 spaces from the buffer.
-    _buffer->size -= 2;
-    // genarate the text string using console_tf()
-    char *textstr = genln(placeholder, _buffer);
-    char left[2] = "\0";
-    char right[2] = "\0";
-
-    if (is_custom_border(ends))
-    {
-        left[0] = ends.custom.left_end;
-        right[0] = ends.custom.right_end;
-    }
-    else
-    {
-        left[0] = right[0] = ends.common;
-    }
-
-    // allocate new memory for the result string
-    char *result = malloc(strlen(textstr) + 2 * sizeof(char));
 
     // genarate the final string
-    strcpy(result, left);
-    strcat(result, textstr);
-    strcat(result, right);
+    //building the final string
+    if (ends)
+    {
+        strcpy(result, _end[0]);
+        for (int i = 0; i < _buffer; i++)
+        {
+            strcat(result, ph_str);
+        }
+        strcat(result, _end[1]);
+    }
+    else
+    {
+        for (int i = 0; i < _buffer; i++)
+        {
+            strcat(result, ph_str);
+        }
+    }
 
-    free(textstr);
+    // freeing allocated memory
+    free(_end);
+
     return result;
 }
-#pragma endregion
 
-#pragma region prints
-void drawln(char placeholder, int size)
+// Main print function for generate lines
+void drawln(char *ends, int width, int next_ln, char placeholder)
 {
-    buffer_w new_bf = {0, size};
-
-    char *result = genln(placeholder, &new_bf);
+    char *result = genln(width, ends, placeholder);
     printf("%s", result);
+    // free(result);
+
+    // print if next line is enabled
+    if (next_ln)
+        printf("\n");
+
     free(result);
 }
-
-void drawlne(char placeholder, border ends, int size)
-{
-    buffer_w new_bf = {0, size};
-
-    char *result = genlne(placeholder, ends, &new_bf);
-    printf("%s", result);
-    free(result);
-}
-#pragma endregion
 
 #pragma region print_lines
 void separator()
 {
-    char *result = genln(def_placeholder, &full_width);
-    printf("%s\n", result);
-    free(result);
+    drawln(NULL, FULL_WIDTH, 1, def_placeholder);
 }
 
 void separator_c(char placeholder)
 {
-    char *result = genln(placeholder, &full_width);
-    printf("%s\n", result);
-    free(result);
+    drawln(NULL, FULL_WIDTH, 1, placeholder);
 }
 #pragma endregion

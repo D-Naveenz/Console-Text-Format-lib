@@ -1,4 +1,4 @@
-#ifndef CTF_CORE_H   /* Include guard */
+#ifndef CTF_CORE_H /* Include guard */
 #define CTF_CORE_H
 
 //The boolean header in included by default
@@ -6,19 +6,26 @@
 #include <stdbool.h>
 #endif // !_STDBOOL_H
 
-#ifndef CTF_VARS_H
-#include <ctf-vars.h>
-#endif // !CTF_VARS_H
+#define FULL_WIDTH 100
+#define BORDER_DELIM ","
 
-buffer_w full_width;
+// Enumeration of text alignment (left, Right, Center)
+typedef enum alignment
+{
+    left,
+    right,
+    center
+} align;
 
 #pragma region functions
-unsigned short get_window_buffer_width();
-buffer_w *validate_buffer(buffer_w *_buffer);
+unsigned short get_buffer(int percentage);
+char *trim(char *str);
+char *strdup(const char *s);
+char *strndup(const char *s, size_t n);
+void freev(void **ptr, int len, bool free_seg);
 //Returns a string of spaces according to the alignment and buffer size
 //Dynamically allocated - It should be freed memory after being used.
 char *get_spaces_ptr(char *text, align align, size_t buffer_size);
-bool is_custom_border(border target);
 #pragma endregion
 
 #endif // !CTF_CORE_H

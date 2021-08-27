@@ -1,15 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <contf.h>
-
-void header()
-{
-    println_c("Console Text Format lib - v1.0");
-    print_tf("Test v0.2", left, 50);
-    print_tf("Naveen Dharmathunga", right, 50);
-    separator();
-    //new_line();
-}
+#include <ctf-tests.h>
 
 int main()
 {
@@ -20,26 +12,25 @@ int main()
     printf("\n||||Text processing features||||\n");
     
     printf("\n1) Format text alignment.\n");
-    println_l("Left aligned text");
-    println_r("Right aligned text");
-    println_c("Center aligned text");
+    println("Left aligned text");
+    printlnR("Right aligned text");
+    printlnC("Center aligned text");
 
     printf("\n2) Format text alignment with user defined buffer width.\n");
-    print_tf("Right aligned text", right, 40);
+    printFText(textRight, 40, NULL, 0, "Right aligned text");
     printf("|<- with 40%% console buffer width\n");
-    print_tf("Center aligned text", center, 60);
+    printFText(textCenter, 60, NULL, 0, "Center aligned text");
     printf("|<- with 60%% console buffer width\n");
     // contf lib printf functions doesn't work as printf() at everytime
     // cannot print variables like printf("%s", anystring);
-    print_tf("50% left aligned text", left, 50);
-    print_tf("50% right aligned text", right, 50);
+    printFText(textLeft, 50, NULL, 0, "50% left aligned text");
+    printFText(textRight, 50, NULL, 0, "50% right aligned text");
 
     printf("\n3) Can print a text with a border.\n");
-    // https://stackoverflow.com/questions/17556780/how-can-i-assign-value-to-the-struct-inside-union-here
-    border common_b = {(char)178};
-    border custom_b = {.custom = {'{', '}'}};
-    println_tfb("Text with common borders", left, common_b, 80);
-    println_tfb("Text with custom borders", center, custom_b, 40);
+    char common_b[] = {(char)178, '\0'};
+    char custom_b[] = {'{', ',', '}', '\0'};
+    println_ab(textLeft, 80, common_b, "Text with common borders");
+    println_ab(textLeft, 80, custom_b, "Text with custom borders");
     getch();
     return 0;
 }

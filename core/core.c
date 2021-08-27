@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
+#include <ctype.h>
+#include <string.h>
 #include <ctf-core.h>
 
 // The following code segment works for all for all Windows OS
@@ -53,33 +55,74 @@ char *get_spaces_ptr(char *text, align align, size_t buffer_size)
 	return spaces_ptr;
 }
 
-buffer_w *validate_buffer(buffer_w *_buffer)
+unsigned short get_buffer(int percentage)
 {
-	if (_buffer->size == 0)
-	{
-		unsigned short width = get_window_buffer_width();
-		_buffer->size = width * _buffer->percentage / 100;
-		_buffer->percentage = 0;
-		return _buffer;
-	}
-	else
-	{
-		_buffer->percentage = 0;
-		return _buffer;
-	}
+	unsigned short res;
+
+	unsigned short width = get_window_buffer_width();
+	res = width * percentage / 100;
+
+	return res;
 }
 
-bool is_custom_border(border target)
+#pragma region string functions
+char *strdup(const char *s)
 {
-	//char a = target.custom.left_end;
-	char b = target.custom.right_end;
-
-	if (b != 0)
+	size_t size = strlen(s) + 1;
+	char *p = malloc(size);
+	if (p != NULL)
 	{
-		return true;
+		memcpy(p, s, size);
 	}
-	else
-	{
-		return false;
-	}
+	return p;
 }
+
+char *strndup(const char *s, size_t n)
+{
+	char *p;
+	size_t n1;
+
+	for (n1 = 0; n1 < n && s[n1] != '\0'; n1++)
+		continue;
+	p = malloc(n + 1);
+	if (p != NULL)
+	{
+		memcpy(p, s, n1);
+		p[n1] = '\0';
+	}
+	return p;
+}
+
+char *trim(char *s)
+{
+	// https://stackoverflow.com/questions/122616/how-do-i-trim-leading-trailing-whitespace-in-a-standard-way
+	int l = strlen(s);
+	if (l == 0)
+		return s;
+
+	while (isspace(s[l - 1]))
+		--l;
+	while (*s && isspace(*s))
+		++s, --l;
+	return strndup(s, l);
+}
+
+void freev(void **ptr, int len, bool free_seg)
+// https://stackoverflow.com/questions/5666214/how-to-free-2d-array-in-c
+{
+	if (len < 0)
+		while (*ptr)
+		{
+			free(*ptr);
+			*ptr++ = NULL;
+		}
+	else
+		while (len)
+		{
+			free(ptr[len]);
+			ptr[len--] = NULL;
+		}
+	if (free_seg)
+		free(ptr);
+}
+#pragma endregion

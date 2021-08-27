@@ -8,6 +8,7 @@
                 "-g",
                 "${file}",
                 "${workspaceFolder}\\core\\**.c",
+                "${workspaceFolder}\\tests\\tests.c",
                 "-I",
                 "${workspaceFolder}\\include",
                 "-o",
