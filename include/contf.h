@@ -1,5 +1,5 @@
 /*
-** Console Text Format lib v1.1
+** Console Text Format lib v1.2
 ** The main header file. Include this header into your program
 ** Naveen Dharmathunga - 27/08/2021
 */

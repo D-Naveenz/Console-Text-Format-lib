@@ -66,7 +66,7 @@ $H_Blank = HeaderBlankLine
 $H_TopBottom
 $H_Blank
 HeaderCenterText "Console Text Formatter library builder tool"
-HeaderCenterText "v1.1"
+HeaderCenterText "v1.2"
 $H_Blank
 $H_TopBottom
 Write-Output "Initializing..."
